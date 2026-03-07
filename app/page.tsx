@@ -311,32 +311,12 @@ export default function LandingPage() {
           <div className="flex items-center gap-2">
             <Zap className="w-4 h-4 text-accent-green" />
             <span className="font-mono text-sm">promptforge</span>
-            <span className="text-text-muted text-sm">
-              — free & open source
-            </span>
+            <span className="text-text-muted text-sm">— free & open source</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-text-secondary">
-            <a
-              href="https://github.com/Vt01nft/promptforge"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-text-primary transition-colors"
-            >
-              github
-            </a>
-            <Link
-              href="/templates"
-              className="hover:text-text-primary transition-colors"
-            >
-              templates
-            </Link>
-            href="https://x.com/VT_zero1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 text-text-muted hover:text-text-primary transition-colors"
-            >
-              built by vt <Heart className="w-3 h-3 text-accent-red" />
-            </a>
+            <a href="https://github.com/Vt01nft/promptforge" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">github</a>
+            <Link href="/templates" className="hover:text-text-primary transition-colors">templates</Link>
+            <a href="https://x.com/VT_zero1" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-text-muted hover:text-text-primary transition-colors">{"built by vt"} <Heart className="w-3 h-3 text-accent-red" /></a>
           </div>
         </div>
       </footer>
