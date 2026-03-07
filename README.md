@@ -42,7 +42,7 @@ describe what you want to build → get a perfectly structured prompt → paste 
 
 ```bash
 # clone the repo
-git clone https://github.com/YOUR_USERNAME/promptforge.git
+git clone https://github.com/Vt01nft/promptforge.git
 cd promptforge
 
 # install dependencies
