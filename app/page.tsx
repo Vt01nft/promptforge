@@ -148,7 +148,7 @@ export default function LandingPage() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a
-              href="https://github.com"
+              href="https://github.com/Vt01nft/promptforge"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-text-secondary hover:text-text-primary hover:border-border-hover transition-all"
@@ -317,7 +317,7 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-6 text-sm text-text-secondary">
             <a
-              href="https://github.com"
+              href="https://github.com/Vt01nft/promptforge"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-text-primary transition-colors"
@@ -330,9 +330,13 @@ export default function LandingPage() {
             >
               templates
             </Link>
-            <span className="flex items-center gap-1 text-text-muted">
-              built with <Heart className="w-3 h-3 text-accent-red" />
-            </span>
+            href="https://x.com/VT_zero1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-text-muted hover:text-text-primary transition-colors"
+            >
+              built by vt <Heart className="w-3 h-3 text-accent-red" />
+            </a>
           </div>
         </div>
       </footer>

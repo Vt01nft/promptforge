@@ -31,7 +31,7 @@ export default function Navbar() {
             templates
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/Vt01nft/promptforge"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary transition-colors"
