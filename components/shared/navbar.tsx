@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Zap, Github, Menu, X } from "lucide-react";
+import { Zap, Github, Menu, X, Wand2, Shuffle, ClipboardCheck } from "lucide-react";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -17,40 +17,25 @@ export default function Navbar() {
           <span className="font-mono font-bold text-lg">promptforge</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          <Link
-            href="/forge"
-            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            forge
+        <div className="hidden md:flex items-center gap-5">
+          <Link href="/forge" className="text-sm text-text-secondary hover:text-text-primary transition-colors">forge</Link>
+          <Link href="/wizard" className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors">
+            <Wand2 className="w-3.5 h-3.5" />wizard
           </Link>
-          <Link
-            href="/templates"
-            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            templates
+          <Link href="/score" className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors">
+            <ClipboardCheck className="w-3.5 h-3.5" />score
           </Link>
-          <a
-            href="https://github.com/Vt01nft/promptforge"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
+          <Link href="/remix" className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors">
+            <Shuffle className="w-3.5 h-3.5" />remix
+          </Link>
+          <Link href="/templates" className="text-sm text-text-secondary hover:text-text-primary transition-colors">templates</Link>
+          <a href="https://github.com/Vt01nft/promptforge" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary transition-colors">
             <Github className="w-4 h-4" />
-            <span>github</span>
           </a>
-          <Link
-            href="/forge"
-            className="px-4 py-2 rounded-lg bg-accent-green/10 text-accent-green text-sm font-medium hover:bg-accent-green/20 transition-colors"
-          >
-            start forging
-          </Link>
+          <Link href="/forge" className="px-4 py-2 rounded-lg bg-accent-green/10 text-accent-green text-sm font-medium hover:bg-accent-green/20 transition-colors">start forging</Link>
         </div>
 
-        <button
-          className="md:hidden text-text-secondary"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden text-text-secondary" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
@@ -58,19 +43,18 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-bg-secondary">
           <div className="flex flex-col p-4 gap-4">
-            <Link href="/forge" className="text-sm text-text-secondary" onClick={() => setMobileOpen(false)}>
-              forge
+            <Link href="/forge" className="text-sm text-text-secondary" onClick={() => setMobileOpen(false)}>forge</Link>
+            <Link href="/wizard" className="flex items-center gap-1.5 text-sm text-text-secondary" onClick={() => setMobileOpen(false)}>
+              <Wand2 className="w-3.5 h-3.5" /> wizard mode
             </Link>
-            <Link href="/templates" className="text-sm text-text-secondary" onClick={() => setMobileOpen(false)}>
-              templates
+            <Link href="/score" className="flex items-center gap-1.5 text-sm text-text-secondary" onClick={() => setMobileOpen(false)}>
+              <ClipboardCheck className="w-3.5 h-3.5" /> prompt score
             </Link>
-            <Link
-              href="/forge"
-              className="px-4 py-2 rounded-lg bg-accent-green/10 text-accent-green text-sm font-medium text-center"
-              onClick={() => setMobileOpen(false)}
-            >
-              start forging
+            <Link href="/remix" className="flex items-center gap-1.5 text-sm text-text-secondary" onClick={() => setMobileOpen(false)}>
+              <Shuffle className="w-3.5 h-3.5" /> remix
             </Link>
+            <Link href="/templates" className="text-sm text-text-secondary" onClick={() => setMobileOpen(false)}>templates</Link>
+            <Link href="/forge" className="px-4 py-2 rounded-lg bg-accent-green/10 text-accent-green text-sm font-medium text-center" onClick={() => setMobileOpen(false)}>start forging</Link>
           </div>
         </div>
       )}

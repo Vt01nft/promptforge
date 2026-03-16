@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     "chatgpt prompt",
     "prompt template",
     "free prompt tool",
+    "prompt score",
+    "prompt wizard",
   ],
   openGraph: {
     title: "promptforge",

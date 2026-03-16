@@ -18,6 +18,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { copyToClipboard, downloadAsMarkdown, estimateTokens } from "@/lib/utils";
+import PromptCoach from "@/components/forge/prompt-coach";
 
 export default function PromptOutput() {
   const { generatedPrompt, provider, model, tokens, idea, reset } =
@@ -205,6 +206,11 @@ export default function PromptOutput() {
           </div>
         </motion.div>
       )}
+
+      {/* ai prompt coach */}
+      <div className="mb-6">
+        <PromptCoach prompt={generatedPrompt} />
+      </div>
 
       {/* back button */}
       <div className="flex items-center">

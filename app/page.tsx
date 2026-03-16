@@ -13,17 +13,20 @@ import {
   Shield,
   Globe,
   Terminal,
-  Heart,
   Star,
+  Wand2,
+  ClipboardCheck,
+  Shuffle,
 } from "lucide-react";
 import Navbar from "@/components/shared/navbar";
 
-const fadeUp = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const fadeUp: any = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" as const },
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0, 0, 0.2, 1] },
   }),
 };
 
@@ -66,6 +69,41 @@ const features = [
   },
 ];
 
+const tools = [
+  {
+    icon: Zap,
+    title: "forge",
+    description: "describe your idea, get a perfect prompt",
+    href: "/forge",
+    color: "text-accent-green",
+    bg: "bg-accent-green/10",
+  },
+  {
+    icon: Wand2,
+    title: "wizard",
+    description: "step-by-step guided form for beginners",
+    href: "/wizard",
+    color: "text-accent-purple",
+    bg: "bg-accent-purple/10",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "score",
+    description: "paste any prompt, get a quality score + auto-fix",
+    href: "/score",
+    color: "text-accent-blue",
+    bg: "bg-accent-blue/10",
+  },
+  {
+    icon: Shuffle,
+    title: "remix",
+    description: "browse community prompts, copy or remix",
+    href: "/remix",
+    color: "text-accent-yellow",
+    bg: "bg-accent-yellow/10",
+  },
+];
+
 const exampleOutput = `<role>
 you are a senior full-stack developer
 specializing in modern web applications...
@@ -84,10 +122,10 @@ build a crypto portfolio tracker...
 
 <file_structure>
 crypto-tracker/
-├── app/
-│   ├── layout.tsx
-│   ├── dashboard/
-│   │   └── page.tsx
+\u251C\u2500\u2500 app/
+\u2502   \u251C\u2500\u2500 layout.tsx
+\u2502   \u251C\u2500\u2500 dashboard/
+\u2502   \u2502   \u2514\u2500\u2500 page.tsx
 ...
 </file_structure>`;
 
@@ -109,7 +147,7 @@ export default function LandingPage() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-bg-secondary/50 text-sm text-text-secondary mb-8"
           >
             <Star className="w-3.5 h-3.5 text-accent-yellow" />
-            <span>free & open source — star us on github</span>
+            <span>{"free & open source \u2014 star us on github"}</span>
           </motion.div>
 
           <motion.h1
@@ -118,8 +156,9 @@ export default function LandingPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
           >
-            turn rough ideas into{" "}
-            <span className="text-gradient">production-grade</span> prompts
+            {"turn rough ideas into "}
+            <span className="text-gradient">{"production-grade"}</span>
+            {" prompts"}
           </motion.h1>
 
           <motion.p
@@ -128,9 +167,8 @@ export default function LandingPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            describe what you want to build. get a perfectly structured prompt
-            that any LLM will execute flawlessly.{" "}
-            <span className="text-text-primary">first try.</span>
+            {"describe what you want to build. get a perfectly structured prompt that any LLM will execute flawlessly. "}
+            <span className="text-text-primary">{"first try."}</span>
           </motion.p>
 
           <motion.div
@@ -144,7 +182,7 @@ export default function LandingPage() {
               className="group flex items-center gap-2 px-8 py-4 rounded-xl bg-accent-green text-bg-primary font-semibold text-lg hover:bg-accent-green/90 transition-all glow-green"
             >
               <Zap className="w-5 h-5" />
-              start forging
+              {"start forging"}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a
@@ -154,8 +192,37 @@ export default function LandingPage() {
               className="flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-text-secondary hover:text-text-primary hover:border-border-hover transition-all"
             >
               <Github className="w-5 h-5" />
-              view on github
+              {"view on github"}
             </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* tools section */}
+      <section className="py-16 px-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          >
+            {tools.map((tool, i) => (
+              <motion.div key={tool.title} variants={fadeUp} custom={i}>
+                <Link
+                  href={tool.href}
+                  className="block p-5 rounded-xl border border-border bg-bg-secondary/30 hover:border-border-hover hover:bg-bg-tertiary/30 transition-all group"
+                >
+                  <div className={`w-10 h-10 rounded-lg ${tool.bg} flex items-center justify-center mb-3`}>
+                    <tool.icon className={`w-5 h-5 ${tool.color}`} />
+                  </div>
+                  <p className="font-semibold text-sm mb-1 group-hover:text-accent-green transition-colors">
+                    {tool.title}
+                  </p>
+                  <p className="text-xs text-text-muted">{tool.description}</p>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -169,10 +236,9 @@ export default function LandingPage() {
             viewport={{ once: true, margin: "-100px" }}
             className="grid md:grid-cols-2 gap-6"
           >
-            {/* input side */}
             <motion.div variants={fadeUp} custom={0} className="space-y-4">
               <div className="text-sm font-mono text-accent-green mb-2">
-                input
+                {"input"}
               </div>
               <div className="rounded-xl border border-border bg-bg-secondary p-6">
                 <div className="flex items-center gap-2 mb-4">
@@ -181,20 +247,18 @@ export default function LandingPage() {
                   <div className="w-3 h-3 rounded-full bg-accent-green/60" />
                 </div>
                 <p className="text-text-secondary font-mono text-sm leading-relaxed">
-                  &quot;i want a crypto portfolio tracker website where i can
-                  add my wallets and see all my tokens and their prices&quot;
+                  {"\"i want a crypto portfolio tracker website where i can add my wallets and see all my tokens and their prices\""}
                 </p>
               </div>
               <div className="flex items-center gap-2 text-text-muted text-sm">
                 <Terminal className="w-4 h-4" />
-                <span>that&apos;s it. that&apos;s all you type.</span>
+                <span>{"that's it. that's all you type."}</span>
               </div>
             </motion.div>
 
-            {/* output side */}
             <motion.div variants={fadeUp} custom={1} className="space-y-4">
               <div className="text-sm font-mono text-accent-blue mb-2">
-                output
+                {"output"}
               </div>
               <div className="rounded-xl border border-border bg-bg-secondary p-6 max-h-80 overflow-hidden relative">
                 <div className="flex items-center gap-2 mb-4">
@@ -209,9 +273,7 @@ export default function LandingPage() {
               </div>
               <div className="flex items-center gap-2 text-text-muted text-sm">
                 <Sparkles className="w-4 h-4" />
-                <span>
-                  2,400 tokens of perfectly structured prompt
-                </span>
+                <span>{"2,400 tokens of perfectly structured prompt"}</span>
               </div>
             </motion.div>
           </motion.div>
@@ -232,14 +294,14 @@ export default function LandingPage() {
               custom={0}
               className="text-3xl md:text-4xl font-bold mb-4"
             >
-              how it works
+              {"how it works"}
             </motion.h2>
             <motion.p
               variants={fadeUp}
               custom={1}
               className="text-text-secondary text-lg"
             >
-              rough idea in → perfect prompt out → paste into any LLM → ship
+              {"rough idea in \u2192 perfect prompt out \u2192 paste into any LLM \u2192 ship"}
             </motion.p>
           </motion.div>
 
@@ -282,14 +344,14 @@ export default function LandingPage() {
               custom={0}
               className="text-3xl md:text-4xl font-bold mb-4"
             >
-              stop writing bad prompts
+              {"stop writing bad prompts"}
             </motion.h2>
             <motion.p
               variants={fadeUp}
               custom={1}
               className="text-text-secondary text-lg mb-8"
             >
-              let promptforge do the engineering. you focus on the idea.
+              {"let promptforge do the engineering. you focus on the idea."}
             </motion.p>
             <motion.div variants={fadeUp} custom={2}>
               <Link
@@ -297,7 +359,7 @@ export default function LandingPage() {
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-accent-green text-bg-primary font-semibold text-lg hover:bg-accent-green/90 transition-all glow-green"
               >
                 <Zap className="w-5 h-5" />
-                forge your first prompt
+                {"forge your first prompt"}
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </motion.div>
@@ -310,13 +372,34 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <Zap className="w-4 h-4 text-accent-green" />
-            <span className="font-mono text-sm">promptforge</span>
-            <span className="text-text-muted text-sm">— free & open source</span>
+            <span className="font-mono text-sm">{"promptforge"}</span>
+            <span className="text-text-muted text-sm">
+              {"\u2014 free & open source"}
+            </span>
           </div>
           <div className="flex items-center gap-6 text-sm text-text-secondary">
-            <a href="https://github.com/Vt01nft/promptforge" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">github</a>
-            <Link href="/templates" className="hover:text-text-primary transition-colors">templates</Link>
-            <a href="https://x.com/VT_zero1" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text-primary transition-colors">{"built by vt"}</a>
+            <a
+              href="https://github.com/Vt01nft/promptforge"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-text-primary transition-colors"
+            >
+              {"github"}
+            </a>
+            <Link
+              href="/templates"
+              className="hover:text-text-primary transition-colors"
+            >
+              {"templates"}
+            </Link>
+            <a
+              href="https://x.com/VT_zero1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-muted hover:text-text-primary transition-colors"
+            >
+              {"built by vt"}
+            </a>
           </div>
         </div>
       </footer>

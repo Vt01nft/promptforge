@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForgeStore } from "@/lib/store";
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight, Zap, MessageCircle } from "lucide-react";
@@ -19,16 +20,34 @@ export default function Interview() {
     setError,
   } = useForgeStore();
 
+  const [otherInputs, setOtherInputs] = useState<Record<string, string>>({});
+
   const handleGenerate = async () => {
     setStep("generating");
     setLoading(true);
     setError(null);
 
+    // merge "Other" custom inputs into answers
+    const finalAnswers = { ...answers };
+    for (const [qId, customText] of Object.entries(otherInputs)) {
+      if (customText.trim()) {
+        const currentAnswer = finalAnswers[qId];
+        if (Array.isArray(currentAnswer)) {
+          // replace "Other" with the custom text
+          finalAnswers[qId] = currentAnswer.map((a) =>
+            a === "Other" ? customText.trim() : a
+          );
+        } else if (currentAnswer === "Other") {
+          finalAnswers[qId] = customText.trim();
+        }
+      }
+    }
+
     try {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idea, answers, category }),
+        body: JSON.stringify({ idea, answers: finalAnswers, category }),
       });
 
       if (!res.ok) {
@@ -58,6 +77,27 @@ export default function Interview() {
     } else {
       setAnswer(questionId, option);
     }
+
+    // clear other input if deselecting "Other"
+    if (option === "Other") {
+      const isSelected = type === "multiselect"
+        ? ((answers[questionId] as string[]) || []).includes("Other")
+        : answers[questionId] === "Other";
+      if (isSelected) {
+        setOtherInputs((prev) => {
+          const next = { ...prev };
+          delete next[questionId];
+          return next;
+        });
+      }
+    }
+  };
+
+  const isOtherSelected = (questionId: string, type: string) => {
+    if (type === "multiselect") {
+      return ((answers[questionId] as string[]) || []).includes("Other");
+    }
+    return answers[questionId] === "Other";
   };
 
   const answeredCount = Object.keys(answers).length;
@@ -71,7 +111,7 @@ export default function Interview() {
     >
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold mb-3">
-          let&apos;s refine your vision
+          {"let\u0027s refine your vision"}
         </h2>
         <p className="text-text-secondary">
           answer a few questions so we can generate the perfect prompt
@@ -84,7 +124,7 @@ export default function Interview() {
           <MessageCircle className="w-4 h-4 text-accent-green" />
           <span className="text-xs font-mono text-text-muted">your idea</span>
         </div>
-        <p className="text-sm text-text-secondary font-mono">&quot;{idea}&quot;</p>
+        <p className="text-sm text-text-secondary font-mono">{"\u0022"}{idea}{"\u0022"}</p>
       </div>
 
       {/* questions */}
@@ -113,28 +153,53 @@ export default function Interview() {
                 className="w-full px-4 py-3 rounded-lg border border-border bg-bg-primary text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-accent-green/40 transition-all"
               />
             ) : (
-              <div className="flex flex-wrap gap-2">
-                {q.options?.map((option) => {
-                  const isSelected =
-                    q.type === "multiselect"
-                      ? ((answers[q.id] as string[]) || []).includes(option)
-                      : answers[q.id] === option;
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  {q.options?.map((option) => {
+                    const isSelected =
+                      q.type === "multiselect"
+                        ? ((answers[q.id] as string[]) || []).includes(option)
+                        : answers[q.id] === option;
 
-                  return (
-                    <button
-                      key={option}
-                      onClick={() => handleSelectAnswer(q.id, option, q.type)}
-                      className={cn(
-                        "px-4 py-2 rounded-lg border text-sm font-mono transition-all",
-                        isSelected
-                          ? "border-accent-green/40 bg-accent-green/10 text-accent-green"
-                          : "border-border bg-bg-primary text-text-secondary hover:border-border-hover"
-                      )}
-                    >
-                      {option}
-                    </button>
-                  );
-                })}
+                    return (
+                      <button
+                        key={option}
+                        onClick={() => handleSelectAnswer(q.id, option, q.type)}
+                        className={cn(
+                          "px-4 py-2 rounded-lg border text-sm font-mono transition-all",
+                          isSelected
+                            ? "border-accent-green/40 bg-accent-green/10 text-accent-green"
+                            : "border-border bg-bg-primary text-text-secondary hover:border-border-hover"
+                        )}
+                      >
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* show text input when "Other" is selected */}
+                {isOtherSelected(q.id, q.type) && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="overflow-hidden"
+                  >
+                    <input
+                      type="text"
+                      value={otherInputs[q.id] || ""}
+                      onChange={(e) =>
+                        setOtherInputs((prev) => ({
+                          ...prev,
+                          [q.id]: e.target.value,
+                        }))
+                      }
+                      placeholder="specify your custom answer..."
+                      className="w-full px-4 py-3 rounded-lg border border-accent-green/30 bg-bg-primary text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-accent-green/40 transition-all"
+                      autoFocus
+                    />
+                  </motion.div>
+                )}
               </div>
             )}
           </motion.div>
