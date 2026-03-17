@@ -34,38 +34,32 @@ const features = [
   {
     icon: Sparkles,
     title: "rough idea in",
-    description:
-      "type what you want to build in plain language. no prompt expertise needed.",
+    description: "type what you want to build in plain language. no prompt expertise needed.",
   },
   {
     icon: Layers,
     title: "smart interview",
-    description:
-      "adaptive follow-up questions that understand your vision. fewer questions for experts.",
+    description: "adaptive follow-up questions that understand your vision. fewer questions for experts.",
   },
   {
     icon: FileCode,
     title: "perfect prompt out",
-    description:
-      "production-grade prompt with role, tech stack, file structure, design specs, and build order.",
+    description: "production-grade prompt with role, tech stack, file structure, design specs, and build order.",
   },
   {
     icon: Copy,
     title: "paste into any LLM",
-    description:
-      "works with claude, chatgpt, gemini, qwen — any LLM builds exactly what you described.",
+    description: "works with claude, chatgpt, gemini, qwen - any LLM builds exactly what you described.",
   },
   {
     icon: Shield,
     title: "100% free forever",
-    description:
-      "no signup. no api key. no limits. powered by free open-source LLMs.",
+    description: "no signup. no api key. no limits. powered by free open-source LLMs.",
   },
   {
     icon: Globe,
     title: "open source",
-    description:
-      "MIT licensed. contribute templates, improve prompts, make it yours.",
+    description: "MIT licensed. contribute templates, improve prompts, make it yours.",
   },
 ];
 
@@ -122,10 +116,10 @@ build a crypto portfolio tracker...
 
 <file_structure>
 crypto-tracker/
-\u251C\u2500\u2500 app/
-\u2502   \u251C\u2500\u2500 layout.tsx
-\u2502   \u251C\u2500\u2500 dashboard/
-\u2502   \u2502   \u2514\u2500\u2500 page.tsx
+├── app/
+│   ├── layout.tsx
+│   ├── dashboard/
+│   │   └── page.tsx
 ...
 </file_structure>`;
 
@@ -134,7 +128,6 @@ export default function LandingPage() {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* hero */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,212,170,0.08),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(91,127,255,0.06),transparent_50%)]" />
@@ -147,7 +140,7 @@ export default function LandingPage() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-bg-secondary/50 text-sm text-text-secondary mb-8"
           >
             <Star className="w-3.5 h-3.5 text-accent-yellow" />
-            <span>{"free & open source \u2014 star us on github"}</span>
+            <span>{"free & open source - star us on github"}</span>
           </motion.div>
 
           <motion.h1
@@ -198,7 +191,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* tools section */}
       <section className="py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -227,7 +219,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* demo section */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -237,9 +228,7 @@ export default function LandingPage() {
             className="grid md:grid-cols-2 gap-6"
           >
             <motion.div variants={fadeUp} custom={0} className="space-y-4">
-              <div className="text-sm font-mono text-accent-green mb-2">
-                {"input"}
-              </div>
+              <div className="text-sm font-mono text-accent-green mb-2">{"input"}</div>
               <div className="rounded-xl border border-border bg-bg-secondary p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-3 h-3 rounded-full bg-accent-red/60" />
@@ -257,9 +246,7 @@ export default function LandingPage() {
             </motion.div>
 
             <motion.div variants={fadeUp} custom={1} className="space-y-4">
-              <div className="text-sm font-mono text-accent-blue mb-2">
-                {"output"}
-              </div>
+              <div className="text-sm font-mono text-accent-blue mb-2">{"output"}</div>
               <div className="rounded-xl border border-border bg-bg-secondary p-6 max-h-80 overflow-hidden relative">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-3 h-3 rounded-full bg-accent-red/60" />
@@ -280,7 +267,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* features */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -289,19 +275,11 @@ export default function LandingPage() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-16"
           >
-            <motion.h2
-              variants={fadeUp}
-              custom={0}
-              className="text-3xl md:text-4xl font-bold mb-4"
-            >
+            <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-4xl font-bold mb-4">
               {"how it works"}
             </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              custom={1}
-              className="text-text-secondary text-lg"
-            >
-              {"rough idea in \u2192 perfect prompt out \u2192 paste into any LLM \u2192 ship"}
+            <motion.p variants={fadeUp} custom={1} className="text-text-secondary text-lg">
+              {"rough idea in > perfect prompt out > paste into any LLM > ship"}
             </motion.p>
           </motion.div>
 
@@ -322,35 +300,20 @@ export default function LandingPage() {
                   <feature.icon className="w-5 h-5 text-accent-green" />
                 </div>
                 <h3 className="font-semibold mb-2">{feature.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  {feature.description}
-                </p>
+                <p className="text-sm text-text-secondary leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* cta */}
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.h2
-              variants={fadeUp}
-              custom={0}
-              className="text-3xl md:text-4xl font-bold mb-4"
-            >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-4xl font-bold mb-4">
               {"stop writing bad prompts"}
             </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              custom={1}
-              className="text-text-secondary text-lg mb-8"
-            >
+            <motion.p variants={fadeUp} custom={1} className="text-text-secondary text-lg mb-8">
               {"let promptforge do the engineering. you focus on the idea."}
             </motion.p>
             <motion.div variants={fadeUp} custom={2}>
@@ -367,39 +330,17 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* footer */}
       <footer className="border-t border-border py-12 px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <Zap className="w-4 h-4 text-accent-green" />
             <span className="font-mono text-sm">{"promptforge"}</span>
-            <span className="text-text-muted text-sm">
-              {"\u2014 free & open source"}
-            </span>
+            <span className="text-text-muted text-sm">{"- free & open source"}</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-text-secondary">
-            <a
-              href="https://github.com/Vt01nft/promptforge"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-text-primary transition-colors"
-            >
-              {"github"}
-            </a>
-            <Link
-              href="/templates"
-              className="hover:text-text-primary transition-colors"
-            >
-              {"templates"}
-            </Link>
-            <a
-              href="https://x.com/VT_zero1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-text-primary transition-colors"
-            >
-              {"built by vt"}
-            </a>
+            <a href="https://github.com/Vt01nft/promptforge" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">{"github"}</a>
+            <Link href="/templates" className="hover:text-text-primary transition-colors">{"templates"}</Link>
+            <a href="https://x.com/VT_zero1" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-text-primary transition-colors">{"built by vt"}</a>
           </div>
         </div>
       </footer>
